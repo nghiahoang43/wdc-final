@@ -187,18 +187,19 @@ DELIMITER ;
 
 /* Mock database */
 /* Create User */
-CALL sign_up('user1', 'user1@gmail.com', '123');
-CALL sign_up('user2', 'user2@gmail.com', '123');
-CALL sign_up('user3', 'user3@gmail.com', '123');
-CALL sign_up('user4', 'user4@gmail.com', '123');
-CALL sign_up('user5', 'user5@gmail.com', '123');
-CALL sign_up('user6', 'user6@gmail.com', '123');
+CALL sign_up('user1', 'user1@gmail.com', 'WatchMovie12@');
+CALL sign_up('user2', 'user2@gmail.com', 'WatchMovie12@');
+CALL sign_up('user3', 'user3@gmail.com', 'WatchMovie12@');
+CALL sign_up('user4', 'user4@gmail.com', 'WatchMovie12@');
+CALL sign_up('user5', 'user5@gmail.com', 'WatchMovie12@');
+CALL sign_up('user6', 'user6@gmail.com', 'WatchMovie12@');
 
 /* Create Movie */
 CALL add_movie('LIGHTYEAR', 105, 'https://wallis-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00001408?width=300&height=450&allowPlaceHolder=false', 'The sci-fi action-adventure presents the definitive origin story of Buzz Lightyear—the hero who inspired the toy—introducing the legendary Space Ranger who would win generations of fans.');
 CALL add_movie('JURASSIC WORLD: DOMINION', 147, 'https://wallis-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00001152?width=300&height=450&allowPlaceHolder=false', 'This June, experience the epic conclusion to the Jurassic era as two generations unite for the first time. Chris Pratt and Bryce Dallas Howard are joined by Oscar®-winner Laura Dern, Jeff Goldblum, and Sam Neill in Jurassic World Dominion, a bold, timely, and breathtaking new adventure that spans the globe.');
-CALL add_movie('DOCTOR STRANGE IN THE MULTIVERSE OF MADNESS', 126, 'https://wallis-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000975?width=300&height=450&allowPlaceHolder=false', 'In Marvel Studios’ Doctor Strange in the Multiverse of Madness, the MCU unlocks the Multiverse and pushes its boundaries further than ever before. Journey into the unknown with Doctor Strange, who, with the help of mystical allies both old and new, traverses the mind-bending and dangerous alternate realities of the Multiverse to confront a mysterious new adversary.');
+CALL add_movie('DOCTOR STRANGE IN THE MULTIVERSE OF MADNESS', 126, 'https://wallis-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000975?width=300&height=450&allowPlaceHolder=false', "In Marvel Studios’ Doctor Strange in the Multiverse of Madness, the MCU unlocks the Multiverse and pushes its boundaries further than ever before. Journey into the unknown with Doctor Strange, who, with the help of mystical allies both old and new, traverses the mind-bending and dangerous alternate realities of the Multiverse to confront a mysterious new adversary.");
 CALL add_movie('TOP GUN: MAVERICK', 130, 'https://wallis-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000704?width=300&height=450&allowPlaceHolder=false', 'After more than thirty years of service as one of the Navy’s top aviators, Pete “Maverick” Mitchell (Tom Cruise) is where he belongs, pushing the envelope as a courageous test pilot and dodging the advancement in rank that would ground him. When he finds himself training a detachment of Top Gun graduates for a specialized mission the likes of which no living pilot has ever seen, Maverick encounters Lt. Bradley Bradshaw (Miles Teller), call sign: “Rooster,” the son of Maverick’s late friend and Radar Intercept Officer Lt. Nick Bradshaw, aka “Goose”.');
+CALL add_movie('PIL’S ADVENTURES', 130, 'https://wallis-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00001158?width=300&height=450&allowPlaceHolder=false', 'After more than thirty years of service as one of the Navy’s top aviators, Pete “Maverick” Mitchell (Tom Cruise) is where he belongs, pushing the envelope as a courageous test pilot and dodging the advancement in rank that would ground him. When he finds himself training a detachment of Top Gun graduates for a specialized mission the likes of which no living pilot has ever seen, Maverick encounters Lt. Bradley Bradshaw (Miles Teller), call sign: “Rooster,” the son of Maverick’s late friend and Radar Intercept Officer Lt. Nick Bradshaw, aka “Goose”.');
 
 /* Create Room */
 CALL add_room(1);
@@ -257,15 +258,26 @@ CALL add_seat(4, 10);
 /* Create Booking */
 CALL add_booking(1, 2, '2022-06-20', '12:30:00');
 CALL add_booking(1, 3, '2022-06-12', '17:10:00');
-CALL add_booking(1, 3, '2022-06-12', '17:10:00');
-CALL add_booking(1, 3, '2022-06-12', '17:10:00');
+CALL add_booking(1, 4, '2022-06-14', '19:10:00');
+CALL add_booking(1, 3, '2022-06-12', '08:10:00');
 CALL add_booking(2, 2, '2022-06-12', '09:00:00');
 CALL add_booking(2, 2, '2022-06-21', '11:30:00');
 CALL add_booking(2, 1, '2022-06-23', '12:30:00');
 CALL add_booking(3, 1, '2022-06-14', '19:45:00');
 CALL add_booking(3, 3, '2022-06-17', '10:10:00');
+CALL add_booking(3, 2, '2022-06-12', '07:30:00');
+CALL add_booking(4, 3, '2022-07-18', '13:10:00');
+CALL add_booking(4, 1, '2022-06-20', '20:10:00');
+CALL add_booking(5, 2, '2022-06-20', '15:50:00');
+CALL add_booking(5, 4, '2022-06-20', '17:00:00');
+CALL add_booking(5, 3, '2022-06-23', '09:00:00');
 
+/* Create Ticket */
 CALL buy_ticket(1, 2, 22);
 CALL buy_ticket(1, 2, 23);
+CALL buy_ticket(2, 14, 32);
+CALL buy_ticket(2, 15, 23);
+CALL buy_ticket(3, 14, 35);
 CALL buy_ticket(3, 2, 30);
+CALL buy_ticket(4, 2, 25);
 CALL buy_ticket(5, 2, 28);

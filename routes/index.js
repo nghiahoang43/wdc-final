@@ -144,27 +144,27 @@ router.post('/filterMovie', function(req, res, next) {
     var arr = [];
     var query = "SELECT DISTINCT Movie.movie_id, Movie.movie_name, Movie.duration, Movie.imgUrl, Movie.about FROM Movie INNER JOIN Booking ON Movie.movie_id = Booking.movie_id WHERE ";
     if (id) {
-      query += "Booking.movie_id = ? AND "
+      query += "Booking.movie_id = ? AND ";
       arr.push(id);
     }
     else {
-      query += "Booking.movie_id = Booking.movie_id AND "
+      query += "Booking.movie_id = Booking.movie_id AND ";
     }
 
     if (date) {
-      query += "Booking.date = ? AND "
+      query += "Booking.date = ? AND ";
       arr.push(date);
     }
     else {
-      query += "Booking.date = Booking.date AND "
+      query += "Booking.date = Booking.date AND ";
     }
 
     if (time) {
-      query += "Booking.startTime = ?;"
+      query += "Booking.startTime = ?;";
       arr.push(time);
     }
     else {
-      query += "Booking.startTime = Booking.startTime;"
+      query += "Booking.startTime = Booking.startTime;";
     }
     connection.query(query, arr, function(err, rows, fields) {
       connection.release(); // release connection

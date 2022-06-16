@@ -1,7 +1,11 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <title>Express</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
   <link rel="stylesheet" href="./stylesheets/style.css">
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
 
@@ -63,7 +67,7 @@
     <div class="main-ctn" v-if="!show_history">
       <div class="filter-bar">
         <div class="search-bar">
-          <select id="movie-search-id" type="text" placeholder="Search your movie" class="search-input">
+          <select id="movie-search-id" class="search-input">
             <option value="">Any Movie</option>
             <option v-for="movie in all_movies" v-bind:value="movie.movie_id">{{movie.movie_name}}</option>
           </select>

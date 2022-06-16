@@ -1,6 +1,6 @@
-let BOOKING = {}
+let BOOKING = {};
 
-let BOOKING_ID = {}
+let BOOKING_ID = {};
 // Get the modal
 var modal = document.getElementById("myModal");
 
@@ -21,6 +21,7 @@ function closeModal() {
   modal.style.display = "none";
 }
 
+// getMovieList
 window.onload = function () {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -39,6 +40,7 @@ window.onload = function () {
   xhttp.send();
 };
 
+// getTicketList
 function updateTicketList() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -56,6 +58,7 @@ function updateTicketList() {
   xhttp.send();
 }
 
+// Vue declare
 var vueinst = new Vue({
   el: "#app",
   data: {
@@ -71,8 +74,8 @@ var vueinst = new Vue({
       xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
           var bookingList = JSON.parse(this.responseText)[0];
-          BOOKING = {}
-          BOOKING_ID = {}
+          BOOKING = {};
+          BOOKING_ID = {};
           for (let booking of bookingList) {
             var date = booking.date.substring(0, 10);
             if (!(date in BOOKING)) {
@@ -106,20 +109,18 @@ var vueinst = new Vue({
         var close = document.getElementById("close-btn");
         close.onclick = function () {
           modal.style.display = "none";
-        }
+        };
         window.onclick = function (event) {
           if (event.target == modal) {
             modal.style.display = "none";
           }
-        }
-      }, 2000)
+        };
+      }, 2000);
     },
-    filterHandler: function () {
-
-    }
   }
 });
 
+// get available seats
 function getAvailSeat(booking_id, date, time) {
   var xhttp = new XMLHttpRequest();
 
@@ -137,46 +138,51 @@ function getAvailSeat(booking_id, date, time) {
   xhttp.send(JSON.stringify({ booking_id: booking_id }));
 }
 
+// update Date Option
 function updateDate() {
   var date_sel = document.getElementById("date-opt");
-  date_sel.innerHTML = ""
+  date_sel.innerHTML = "";
   for (let date in BOOKING) {
     let date_opt = document.createElement('option');
     date_opt.value = date;
     date_opt.innerText = date;
-    date_sel.appendChild(date_opt)
+    date_sel.appendChild(date_opt);
   }
 }
 
+// update Time Option
 function updateTime() {
   var time_sel = document.getElementById("time-opt");
   var date_sel_val = document.getElementById("date-opt").value;
-  time_sel.innerHTML = ""
+  time_sel.innerHTML = "";
   for (let time in BOOKING[date_sel_val]) {
     let time_opt = document.createElement('option');
     time_opt.value = time;
     time_opt.innerText = time;
-    time_sel.appendChild(time_opt)
+    time_sel.appendChild(time_opt);
   }
 }
 
+// update Seat Option
 function updateSeat() {
   var seat_sel = document.getElementById("seat-opt");
   var date_sel_val = document.getElementById("date-opt").value;
   var time_sel_val = document.getElementById("time-opt").value;
-  seat_sel.innerHTML = ""
+  seat_sel.innerHTML = "";
   for (let seat of BOOKING[date_sel_val][time_sel_val]) {
     let seat_opt = document.createElement('option');
     seat_opt.value = seat[0];
     seat_opt.innerText = seat[1];
-    seat_sel.appendChild(seat_opt)
+    seat_sel.appendChild(seat_opt);
   }
 }
 
+// render login
 function loginPage() {
   location.href = "./login.html";
 }
 
+// logout
 function logout() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -188,6 +194,7 @@ function logout() {
   xhttp.send();
 }
 
+// userLogout
 function userLogout() {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function () {
@@ -201,6 +208,7 @@ function userLogout() {
   xhttp.send();
 }
 
+// search Movie
 function searchMovie() {
   var id = document.getElementById("movie-search-id").value;
   var date = document.getElementById("movie-search-date").value;
@@ -223,6 +231,7 @@ function searchMovie() {
   xhttp.send(JSON.stringify({ id: id, date: date, time: time }));
 }
 
+// buy ticket
 function buyTicket() {
   var seat_id = document.getElementById("seat-opt").value;
   var date = document.getElementById("date-opt").value;

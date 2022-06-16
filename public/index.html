@@ -1,7 +1,11 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-  <title>Express</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Index</title>
   <link rel="stylesheet" href="./stylesheets/style.css">
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
 
@@ -21,7 +25,7 @@
           <div class="movie-img-modal">
             <img id="movie-img-modal"
               src="https://wallis-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00001408?width=300&height=450&allowPlaceHolder=false"
-              alt="">
+              alt="movie_image">
           </div>
           <div class="movie-info-modal">
             <div class="movie-info-name" id="movie-info-name"></div>
@@ -60,7 +64,7 @@
     <div class="main-ctn">
       <div class="filter-bar">
         <div class="search-bar">
-          <select id="movie-search-id" type="text" placeholder="Search your movie" class="search-input">
+          <select id="movie-search-id" class="search-input">
             <option value="">Any Movie</option>
             <option v-for="movie in all_movies" v-bind:value="movie.movie_id">{{movie.movie_name}}</option>
           </select>
@@ -74,7 +78,7 @@
           <div class="movie-name">{{movie.movie_name}}</div>
           <div class="movie-img-overlay"></div>
           <div class="movie-img">
-            <img v-bind:src="movie.imgUrl">
+            <img v-bind:src="movie.imgUrl" alt="movie_image">
           </div>
         </div>
       </div>
