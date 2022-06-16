@@ -6,6 +6,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+var session = require('express-session'); // THIS CODE //
+
 // use mysql in this app
 var mysql = require('mysql');
 // create a 'pool' (group) of connections to be used for connecting with our SQL server
@@ -30,6 +32,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(session({                       // //
+    secret: 'marcus',  // //
+    resave: false,                      // THIS CODE //
+    saveUninitialized: true,            // //
+    cookie: { secure: false }           // //
+   }));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

@@ -80,7 +80,6 @@ a {
   background-color: white;
   overflow: hidden;
   border-radius: 15px;
-  overflow: hidden;
 }
 
 .filter-bar {
@@ -103,6 +102,17 @@ a {
   border-radius: 60px;
   padding: 10px 20px;
   margin: 0 10px;
+}
+
+.search-input {
+  background-color: transparent;
+  flex: 1;
+  border: 0;
+  outline: none;
+  padding: 12px 15px;
+  font-size: 18px;
+  color: black;
+  width: 100%;
 }
 
 .search-bar {
@@ -375,4 +385,80 @@ a {
 
 .date-opt-ctn label, .time-opt-ctn label, .seat-opt-ctn label {
   font-size: 1.2rem;
+}
+
+#message {
+  color: #FFC600;
+}
+
+.login-page {
+  background-color: #0E1016;
+}
+
+/** ticket **/
+
+.ticket-ctn {
+  padding: 20px;
+  min-height: 80%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ticket-card {
+	width: 230px;
+  height: 380px;
+	background-color: #FFC600;
+  border-radius: 6px;
+  margin: 0 10px 15px;
+}
+
+.ticket-title {
+  font-size: 20px;
+  text-align: center;
+}
+
+.ticket-name {
+  text-align: center;
+  font-size: 25px;
+}
+
+.ticket-img {
+  width: 100%;
+  height: 40%;
+  overflow: hidden;
+}
+
+.ticket-img img {
+  width: 100%;
+  height: auto;
+}
+
+table {
+  width: 100%;
+}
+
+tr {
+  margin-bottom: 10px;
+}
+
+th {
+  text-align: center;
+}
+
+.th-1 {
+  width: 40%;
+}
+
+.th-2 {
+  width: 60%;
+}
+
+td {
+  width: 50%;
+  font-size: 14px;
+  text-align: center;
+}
+
+.bigger {
+  font-size: 30px;
 }

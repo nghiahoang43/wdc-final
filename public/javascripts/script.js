@@ -1,46 +1,5 @@
-
-window.onload = function () {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      vueinst.movies.splice(0);
-      var movieList = JSON.parse(this.responseText);
-      console.log(movieList)
-      for (let movie of movieList) {
-        vueinst.movies.push(movie);
-      }
-    }
-  };
-
-  xhttp.open("POST", "/getMovieList", true);
-  xhttp.send();
-  updateDate();
-  updateTime();
-  updateSeat();
-};
-
-var vueinst = new Vue({
-  el: "#app",
-  data: {
-    movies: [],
-  },
-  // methods: {
-  //   getClickEvent: function (event_id, isHost) {
-  //     var xhttp = new XMLHttpRequest();
-
-  //     xhttp.onreadystatechange = function () {
-  //       if (this.readyState == 4 && this.status == 200) {
-  //       }
-  //     };
-
-  //     xhttp.open("POST", "/getMovie", true);
-  //     xhttp.setRequestHeader("Content-type", "application/json");
-  //     xhttp.send(JSON.stringify({ event_id: event_id }));
-  //   }
-  // }
-
-});
-
+let BOOKING = {
+}
 // Get the modal
 var modal = document.getElementById("myModal");
 
@@ -49,6 +8,7 @@ var btn = document.getElementById("myBtn");
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
+
 
 // When the user clicks on the button, open the modal
 function openModal() {
@@ -60,31 +20,120 @@ function closeModal() {
   modal.style.display = "none";
 }
 
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
+window.onload = function () {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      vueinst.movies.splice(0);
+      vueinst.all_movies.splice(0);
+      var movieList = JSON.parse(this.responseText);
+      for (let movie of movieList) {
+        vueinst.movies.push(movie);
+        vueinst.all_movies.push(movie);
+      }
+    }
+  };
+
+  xhttp.open("POST", "/getMovieList", true);
+  xhttp.send();
+};
+
+function updateTicketList() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      vueinst.tickets.splice(0);
+      var ticketList = JSON.parse(this.responseText)[0];
+      for (let ticket of ticketList) {
+        ticket.date = ticket.date.substring(0, 10);
+        vueinst.tickets.push(ticket);
+      }
+    }
+  };
+
+  xhttp.open("POST", "/users/getTicketList", true);
+  xhttp.send();
 }
 
-let BOOKING = {
-  "22-10-2022": {
-    "10:10:00": [1, 2, 7, 8, 9],
-    "12:00:00": [2, 5, 7, 10, 11, 14],
-    "17:45:00": [3, 6, 8, 9],
+var vueinst = new Vue({
+  el: "#app",
+  data: {
+    movies: [],
+    all_movies: [],
+    show_history: false,
+    tickets: [],
   },
-  "24-10-2022": {
-    "08:20:00": [2, 7, 9, 19],
-    "16:00:00": [3, 4, 7, 10, 18],
-  },
-  "27-10-2022": {
-    "12:00:00": [6, 8, 16],
-    "17:00:00": [5, 7, 12],
-    "21:30:00": [19, 20],
+  methods: {
+    modalOpenHandler: function (movie) {
+      var xhttp = new XMLHttpRequest();
+
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          var bookingList = JSON.parse(this.responseText)[0];
+          BOOKING = {}
+          for (let booking of bookingList) {
+            var date = booking.date.substring(0, 10);
+            if (!(date in BOOKING)) {
+              BOOKING[date] = {}
+            }
+            BOOKING[date][booking.startTime] = []
+            getAvailSeat(booking.booking_id, date, booking.startTime)
+          }
+        }
+      };
+
+      xhttp.open("POST", "/getBookingList", true);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send(JSON.stringify({ movie_id: movie.movie_id }));
+      setTimeout(function () {
+        updateDate();
+        updateTime();
+        updateSeat();
+        var modal = document.getElementById("myModal");
+        modal.style.display = "block";
+        var name = document.getElementById("movie-info-name");
+        name.innerText = movie.movie_name;
+        var img = document.getElementById("movie-img-modal");
+        img.src = movie.imgUrl;
+        var duration = document.getElementById("movie-info-duration");
+        duration.innerText = movie.duration + " minutes";
+        var about = document.getElementById("movie-info-about");
+        about.innerText = movie.about;
+        var close = document.getElementById("close-btn");
+        close.onclick = function () {
+          modal.style.display = "none";
+        }
+        window.onclick = function (event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+      }, 1500)
+    },
+    filterHandler: function () {
+
+    }
   }
+});
+
+function getAvailSeat(booking_id, date, time) {
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      var seatList = JSON.parse(this.responseText)[0];
+      for (let seat of seatList) {
+        BOOKING[date][time].push([seat.seat_id, seat.seat_number]);
+      }
+    }
+  };
+
+  xhttp.open("POST", "/getAvailSeat", true);
+  xhttp.setRequestHeader("Content-type", "application/json");
+  xhttp.send(JSON.stringify({ booking_id: booking_id }));
 }
 
-function updateDate () {
+function updateDate() {
   var date_sel = document.getElementById("date-opt");
   date_sel.innerHTML = ""
   for (let date in BOOKING) {
@@ -95,7 +144,7 @@ function updateDate () {
   }
 }
 
-function updateTime () {
+function updateTime() {
   var time_sel = document.getElementById("time-opt");
   var date_sel_val = document.getElementById("date-opt").value;
   time_sel.innerHTML = ""
@@ -107,17 +156,67 @@ function updateTime () {
   }
 }
 
-function updateSeat () {
+function updateSeat() {
   var seat_sel = document.getElementById("seat-opt");
   var date_sel_val = document.getElementById("date-opt").value;
   var time_sel_val = document.getElementById("time-opt").value;
   seat_sel.innerHTML = ""
-  console.log()
   for (let seat of BOOKING[date_sel_val][time_sel_val]) {
-    console.log(seat)
     let seat_opt = document.createElement('option');
-    seat_opt.value = seat;
-    seat_opt.innerText = seat;
+    console.log(seat[0])
+    seat_opt.value = seat[0];
+    seat_opt.innerText = seat[1];
     seat_sel.appendChild(seat_opt)
   }
+}
+
+function loginPage() {
+  location.href = "./login.html";
+}
+
+function logout() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+    }
+  };
+
+  xhttp.open("GET", "/logout", true);
+  xhttp.send();
+}
+
+function userLogout() {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      logout();
+      location.href = '/login.html';
+    }
+  };
+
+  xhttp.open("GET", "/users/logout", true);
+  xhttp.send();
+}
+
+function searchMovie() {
+  var id = document.getElementById("movie-search-id").value;
+  var date = document.getElementById("movie-search-date").value;
+  var time = document.getElementById("movie-search-time").value;
+
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      vueinst.movies.splice(0);
+      var movieList = JSON.parse(this.responseText);
+      console.log(movieList)
+      for (let movie of movieList) {
+        vueinst.movies.push(movie);
+      }
+    }
+  };
+
+  xhttp.open("POST", "/filterMovie", true);
+  xhttp.setRequestHeader("Content-type", "application/json");
+  xhttp.send(JSON.stringify({ id: id, date: date, time: time }));
 }

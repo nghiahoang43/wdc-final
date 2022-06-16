@@ -45,7 +45,7 @@
               </div>
             </div>
             <div class="buy-btn">
-              <button onclick="loginPage()">LOGIN TO BUY TICKET</button>
+              <button>BUY TICKET</button>
             </div>
           </div>
         </div>
@@ -53,11 +53,14 @@
 
     </div>
     <div class="menu">
+      <div class="history">
+        <button onclick="updateTicketList();vueinst.show_history = !vueinst.show_history;">History</button>
+      </div>
       <div class="logout-btn">
-        <button onclick="loginPage()">Login</button>
+        <button onclick="userLogout()">Logout</button>
       </div>
     </div>
-    <div class="main-ctn">
+    <div class="main-ctn" v-if="!show_history">
       <div class="filter-bar">
         <div class="search-bar">
           <select id="movie-search-id" type="text" placeholder="Search your movie" class="search-input">
@@ -74,7 +77,40 @@
           <div class="movie-name">{{movie.movie_name}}</div>
           <div class="movie-img-overlay"></div>
           <div class="movie-img">
-            <img v-bind:src="movie.imgUrl">
+            <img v-bind:src="movie.imgUrl" alt="movie_image">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-ctn" v-if="show_history">
+      <div class="ticket-ctn">
+        <div v-for="ticket in tickets" class="ticket-card">
+          <div class="ticket-title">TICKET</div>
+          <div class="ticket-img">
+            <img v-bind:src="ticket.imgUrl" alt="ticket_image">
+          </div>
+          <div class="ticket-info">
+            <div class="ticket-name">{{ticket.movie_name}}</div>
+            <table>
+              <tr>
+                <th class="th-1">ROOM</th>
+                <th class="th-2">SEAT</th>
+              </tr>
+              <tr>
+                <td class="bigger">{{ticket.room_number}}</td>
+                <td class="bigger">{{ticket.seat_number}}</td>
+              </tr>
+            </table>
+            <table>
+              <tr>
+                <th class="th-1">DATE</th>
+                <th class="th-2">TIME</th>
+              </tr>
+              <tr>
+                <td>{{ticket.date}}</td>
+                <td>{{ticket.startTime}}</td>
+              </tr>
+            </table>
           </div>
         </div>
       </div>

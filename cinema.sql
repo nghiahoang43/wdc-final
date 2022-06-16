@@ -153,12 +153,35 @@ END //
 DELIMITER ;
 
 DELIMITER //
+CREATE PROCEDURE get_bookings(IN movie_id_ INT)
+BEGIN
+    SELECT * FROM Booking
+    WHERE Booking.movie_id = movie_id_;
+END //
+DELIMITER ;
+
+DELIMITER //
 CREATE PROCEDURE show_avail(IN booking_id_ INT)
 BEGIN
-    SELECT Seat.seat_id FROM Seat
+    SELECT Seat.seat_id, Seat.seat_number FROM Seat
     INNER JOIN Booking ON Booking.room_id = Seat.room_id
     WHERE Seat.seat_id NOT IN (SELECT seat_id FROM Ticket WHERE Ticket.booking_id = booking_id_)
     AND Booking.booking_id = booking_id_;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE view_ticket (
+    IN user_id_ INT
+)
+BEGIN
+    SELECT Movie.movie_name, Movie.imgUrl, Booking.date, Room.room_number, Booking.startTime, Seat.seat_number from Ticket
+    INNER JOIN Seat ON Seat.seat_id = Ticket.seat_id
+    INNER JOIN Booking ON Booking.booking_id = Ticket.booking_id
+    INNER JOIN Room ON Room.room_id = Booking.room_id
+    INNER JOIN Movie ON Booking.movie_id = Movie.movie_id
+    WHERE Ticket.user_id = user_id_
+    ORDER BY Booking.date ASC, Booking.startTime ASC;
 END //
 DELIMITER ;
 
