@@ -75,7 +75,7 @@ router.post('/getMovieList', function(req, res, next) {
       res.sendStatus(500);
       return;
     }
-    var query = "SELECT Movie.movie_id, Movie.event_name, Movie.duration, Movie.imgUrl, Movie.about FROM Movie"; //mark
+    var query = "SELECT * FROM Movie"; //mark
     connection.query(query, [], function(err, rows, fields) {
       connection.release(); // release connection
       if (err) {

@@ -185,17 +185,20 @@ a {
   visibility: hidden;
   opacity: 0;
   width: 260px;
+  height: 320px;
   text-align: center;
   font-size: 40px;
   font-weight: bolder;
   transform: translateY(300px);
   position: absolute;
   transition: 0.3s;
+  align-items: center;
+  justify-content: center;
 }
 
 .movie-card:hover > .movie-name {
   color: white;
-  transform: translateY(100px);
+  transform: translateY(0px);
   visibility: visible;
   opacity: 1;
   z-index: 1;
@@ -228,7 +231,7 @@ a {
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 2; /* Sit on top */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
