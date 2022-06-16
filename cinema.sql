@@ -152,7 +152,15 @@ BEGIN
 END //
 DELIMITER ;
 
-
+DELIMITER //
+CREATE PROCEDURE show_avail(IN booking_id_ INT)
+BEGIN
+    SELECT Seat.seat_id FROM Seat
+    INNER JOIN Booking ON Booking.room_id = Seat.room_id
+    WHERE Seat.seat_id NOT IN (SELECT seat_id FROM Ticket WHERE Ticket.booking_id = booking_id_)
+    AND Booking.booking_id = booking_id_;
+END //
+DELIMITER ;
 
 /* Mock database */
 /* Create User */
@@ -210,12 +218,15 @@ CALL add_seat(3, 9);
 CALL add_seat(3, 10);
 
 /* Create Booking */
-CALL add_booking('1', '2', '2022-06-20', '12:30:00');
-CALL add_booking('1', '3', '2022-06-12', '17:10:00');
-CALL add_booking('2', '2', '2022-06-12', '09:00:00');
-CALL add_booking('2', '2', '2022-06-21', '11:30:00');
-CALL add_booking('2', '1', '2022-06-23', '12:30:00');
-CALL add_booking('3', '1', '2022-06-14', '19:45:00');
-CALL add_booking('3', '3', '2022-06-17', '10:10:00');
+CALL add_booking(1, 2, '2022-06-20', '12:30:00');
+CALL add_booking(1, 3, '2022-06-12', '17:10:00');
+CALL add_booking(2, 2, '2022-06-12', '09:00:00');
+CALL add_booking(2, 2, '2022-06-21', '11:30:00');
+CALL add_booking(2, 1, '2022-06-23', '12:30:00');
+CALL add_booking(3, 1, '2022-06-14', '19:45:00');
+CALL add_booking(3, 3, '2022-06-17', '10:10:00');
 
-CALL 
+CALL buy_ticket(1, 2, 22);
+CALL buy_ticket(1, 2, 23);
+CALL buy_ticket(3, 2, 30);
+CALL buy_ticket(5, 2, 28);
