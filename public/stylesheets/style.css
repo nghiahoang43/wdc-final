@@ -341,3 +341,8 @@ a {
   margin-right: 20px;
   border-radius: 7px;
 }
+
+.history button:hover, .logout-btn button:hover {
+  background-color: #5800ff;
+  color: white;
+}
