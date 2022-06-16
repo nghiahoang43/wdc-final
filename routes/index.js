@@ -67,23 +67,24 @@ router.get('/logout', function(req, res, next) {
   res.end();
 });
 
+/* POST get movie list. */
 router.post('/getMovieList', function(req, res, next) {
-    // Connect to the database
-    req.pool.getConnection(function(err, connection) {
+  // Connect to the database
+  req.pool.getConnection(function(err, connection) {
+    if (err) {
+      res.sendStatus(500);
+      return;
+    }
+    var query = "SELECT Movie.movie_id, Movie.event_name, Movie.duration, Movie.imgUrl, Movie.about FROM Movie"; //mark
+    connection.query(query, [], function(err, rows, fields) {
+      connection.release(); // release connection
       if (err) {
         res.sendStatus(500);
         return;
       }
-      var query = "SELECT * FROM Movie";
-      connection.query(query, [], function(err, rows, fields) {
-        connection.release(); // release connection
-        if (err) {
-          res.sendStatus(500);
-          return;
-        }
-        res.json(rows);
-      });
+      res.json(rows); //send response
     });
+  });
 });
 
 module.exports = router;
