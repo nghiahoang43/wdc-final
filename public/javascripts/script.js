@@ -24,6 +24,21 @@ var vueinst = new Vue({
   data: {
     movies: [],
   },
+  // methods: {
+  //   getClickEvent: function (event_id, isHost) {
+  //     var xhttp = new XMLHttpRequest();
+
+  //     xhttp.onreadystatechange = function () {
+  //       if (this.readyState == 4 && this.status == 200) {
+  //       }
+  //     };
+
+  //     xhttp.open("POST", "/getMovie", true);
+  //     xhttp.setRequestHeader("Content-type", "application/json");
+  //     xhttp.send(JSON.stringify({ event_id: event_id }));
+  //   }
+  // }
+
 });
 
 // Get the modal
