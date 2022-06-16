@@ -79,10 +79,13 @@ a {
   border-radius: 0 0 10px 10px;
   background-color: white;
   overflow: hidden;
+  border-radius: 15px;
+  overflow: hidden;
 }
 
 .filter-bar {
-  background-color: rgba(21, 25, 34, 1);
+  /* background-color: rgba(21, 25, 34, 1); */
+  background-color: #ffc600;
   padding: 20px;
   display: flex;
   align-items: center;
@@ -94,7 +97,7 @@ a {
 .time-filter {
   width: 50%;
   max-width: 700px;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.5);
   display: flex;
   align-items: center;
   border-radius: 60px;
@@ -118,9 +121,9 @@ a {
   flex: 1;
   border: 0;
   outline: none;
-  padding: 16px 20px;
-  font-size: 20px;
-  color: white;
+  padding: 12px 15px;
+  font-size: 18px;
+  color: black;
 }
 
 .filter-bar button {
@@ -129,9 +132,16 @@ a {
   border-radius: 50%;
   width: 60px;
   height: 60px;
-  background: #ffc600;
+  background: #5800ff;
   cursor: pointer;
   font-size: 1.5rem;
+  transition: 0.2s;
+  color: white;
+}
+
+.filter-bar button:hover {
+  background-color: #ffc600;
+  color: black;
 }
 
 .movie-ctn {
@@ -249,7 +259,7 @@ a {
 .modal-content {
   position: relative;
   background-color: #fefefe;
-  margin: 15% auto;
+  margin: 7% auto 0;
   padding: 0;
   border: 1px solid #888;
   width: 70%;
@@ -345,4 +355,21 @@ a {
 .history button:hover, .logout-btn button:hover {
   background-color: #5800ff;
   color: white;
+}
+
+/**** BUY ****/
+
+.buy-option {
+  display: flex;
+}
+
+#date-opt, #time-opt, #seat-opt {
+  margin: 20px 20px 20px 0;
+  font-size: 20px;
+  padding: 10px;
+  width: 90%;
+}
+
+.date-opt-ctn label, .time-opt-ctn label, .seat-opt-ctn label {
+  font-size: 1.2rem;
 }

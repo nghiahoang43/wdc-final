@@ -19,12 +19,35 @@
       </div>
       <div class="modal-body">
         <div class="movie-img-modal">
-          <img src="https://wallis-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00001408?width=300&height=450&allowPlaceHolder=false" alt="">
+          <img
+            src="https://wallis-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00001408?width=300&height=450&allowPlaceHolder=false"
+            alt="">
         </div>
         <div class="movie-info-modal">
           <div class="movie-info-name">LIGHT YEAR</div>
           <div class="movie-info-duration">105 minutes</div>
-          <div class="movie-info-about">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet ex erat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus quis lorem quis odio iaculis pellentesque. Aliquam sapien elit, interdum quis arcu aliquet, commodo suscipit mauris. Proin pellentesque dignissim nibh nec congue. Curabitur fringilla enim erat, ac molestie neque imperdiet ac. Cras cursus nec elit et mollis.</div>
+          <div class="movie-info-about">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet ex erat.
+            Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus quis
+            lorem quis odio iaculis pellentesque. Aliquam sapien elit, interdum quis arcu aliquet, commodo suscipit
+            mauris. Proin pellentesque dignissim nibh nec congue. Curabitur fringilla enim erat, ac molestie neque
+            imperdiet ac. Cras cursus nec elit et mollis.</div>
+          <div class="buy-option">
+            <div class="date-opt-ctn">
+              <label for="date-opt">Date</label>
+              <select id="date-opt" onchange="updateTime();updateSeat()">
+              </select>
+            </div>
+            <div class="time-opt-ctn" onchange="updateSeat()">
+              <label for="time-opt">Time</label>
+              <select id="time-opt">
+              </select>
+            </div>
+            <div class="seat-opt-ctn">
+              <label for="seat-opt">Seat</label>
+              <select id="seat-opt">
+              </select>
+            </div>
+          </div>
           <div class="buy-btn">
             <button>BUY TICKET</button>
           </div>
@@ -88,6 +111,69 @@
         modal.style.display = "none";
       }
     }
+
+    let BOOKING = {
+      "22-10-2022": {
+        "10:10:00": [1, 2, 7, 8, 9],
+        "12:00:00": [2, 5, 7, 10, 11, 14],
+        "17:45:00": [3, 6, 8, 9],
+      },
+      "24-10-2022": {
+        "08:20:00": [2, 7, 9, 19],
+        "16:00:00": [3, 4, 7, 10, 18],
+      },
+      "27-10-2022": {
+        "12:00:00": [6, 8, 16],
+        "17:00:00": [5, 7, 12],
+        "21:30:00": [19, 20],
+      }
+    }
+
+    function updateDate () {
+      var date_sel = document.getElementById("date-opt");
+      date_sel.innerHTML = ""
+      for (let date in BOOKING) {
+        let date_opt = document.createElement('option');
+        date_opt.value = date;
+        date_opt.innerText = date;
+        date_sel.appendChild(date_opt)
+      }
+    }
+
+    function updateTime () {
+      var time_sel = document.getElementById("time-opt");
+      var date_sel_val = document.getElementById("date-opt").value;
+      time_sel.innerHTML = ""
+      for (let time in BOOKING[date_sel_val]) {
+        let time_opt = document.createElement('option');
+        time_opt.value = time;
+        time_opt.innerText = time;
+        time_sel.appendChild(time_opt)
+      }
+    }
+
+    function updateSeat () {
+      var seat_sel = document.getElementById("seat-opt");
+      var date_sel_val = document.getElementById("date-opt").value;
+      var time_sel_val = document.getElementById("time-opt").value;
+      seat_sel.innerHTML = ""
+      console.log()
+      for (let seat of BOOKING[date_sel_val][time_sel_val]) {
+        console.log(seat)
+        let seat_opt = document.createElement('option');
+        seat_opt.value = seat;
+        seat_opt.innerText = seat;
+        seat_sel.appendChild(seat_opt)
+      }
+    }
+
+    window.onload = function() {
+      updateDate();
+      updateTime();
+      updateSeat();
+    }
+
+    
   </script>
 </body>
 
