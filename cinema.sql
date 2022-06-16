@@ -198,11 +198,13 @@ CALL sign_up('user6', 'user6@gmail.com', '123');
 CALL add_movie('LIGHTYEAR', 105, 'https://wallis-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00001408?width=300&height=450&allowPlaceHolder=false', 'The sci-fi action-adventure presents the definitive origin story of Buzz Lightyear—the hero who inspired the toy—introducing the legendary Space Ranger who would win generations of fans.');
 CALL add_movie('JURASSIC WORLD: DOMINION', 147, 'https://wallis-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00001152?width=300&height=450&allowPlaceHolder=false', 'This June, experience the epic conclusion to the Jurassic era as two generations unite for the first time. Chris Pratt and Bryce Dallas Howard are joined by Oscar®-winner Laura Dern, Jeff Goldblum, and Sam Neill in Jurassic World Dominion, a bold, timely, and breathtaking new adventure that spans the globe.');
 CALL add_movie('DOCTOR STRANGE IN THE MULTIVERSE OF MADNESS', 126, 'https://wallis-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000975?width=300&height=450&allowPlaceHolder=false', 'In Marvel Studios’ Doctor Strange in the Multiverse of Madness, the MCU unlocks the Multiverse and pushes its boundaries further than ever before. Journey into the unknown with Doctor Strange, who, with the help of mystical allies both old and new, traverses the mind-bending and dangerous alternate realities of the Multiverse to confront a mysterious new adversary.');
+CALL add_movie('TOP GUN: MAVERICK', 130, 'https://wallis-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00000704?width=300&height=450&allowPlaceHolder=false', 'After more than thirty years of service as one of the Navy’s top aviators, Pete “Maverick” Mitchell (Tom Cruise) is where he belongs, pushing the envelope as a courageous test pilot and dodging the advancement in rank that would ground him. When he finds himself training a detachment of Top Gun graduates for a specialized mission the likes of which no living pilot has ever seen, Maverick encounters Lt. Bradley Bradshaw (Miles Teller), call sign: “Rooster,” the son of Maverick’s late friend and Radar Intercept Officer Lt. Nick Bradshaw, aka “Goose”.');
 
 /* Create Room */
 CALL add_room(1);
 CALL add_room(2);
 CALL add_room(3);
+CALL add_room(4);
 
 /* Create Seat Room 1 */
 CALL add_seat(1, 1);
@@ -240,8 +242,22 @@ CALL add_seat(3, 8);
 CALL add_seat(3, 9);
 CALL add_seat(3, 10);
 
+/* Create Seat Room 4 */
+CALL add_seat(4, 1);
+CALL add_seat(4, 2);
+CALL add_seat(4, 3);
+CALL add_seat(4, 4);
+CALL add_seat(4, 5);
+CALL add_seat(4, 6);
+CALL add_seat(4, 7);
+CALL add_seat(4, 8);
+CALL add_seat(4, 9);
+CALL add_seat(4, 10);
+
 /* Create Booking */
 CALL add_booking(1, 2, '2022-06-20', '12:30:00');
+CALL add_booking(1, 3, '2022-06-12', '17:10:00');
+CALL add_booking(1, 3, '2022-06-12', '17:10:00');
 CALL add_booking(1, 3, '2022-06-12', '17:10:00');
 CALL add_booking(2, 2, '2022-06-12', '09:00:00');
 CALL add_booking(2, 2, '2022-06-21', '11:30:00');
