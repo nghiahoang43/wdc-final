@@ -2,11 +2,93 @@
 
 <head>
   <title>Express</title>
-  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="./stylesheets/style.css">
+  <script src="https://kit.fontawesome.com/a2d20e5bcc.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
-  
+<body class="index-body">
+  <!-- Trigger/Open The Modal -->
+  <!-- <button id="myBtn">Open Modal</button> -->
+
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" onclick="closeModal()">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div class="movie-img-modal">
+          <img src="https://wallis-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00001408?width=300&height=450&allowPlaceHolder=false" alt="">
+        </div>
+        <div class="movie-info-modal">
+          <div class="movie-info-name">LIGHT YEAR</div>
+          <div class="movie-info-duration">105 minutes</div>
+          <div class="movie-info-about">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sit amet ex erat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus quis lorem quis odio iaculis pellentesque. Aliquam sapien elit, interdum quis arcu aliquet, commodo suscipit mauris. Proin pellentesque dignissim nibh nec congue. Curabitur fringilla enim erat, ac molestie neque imperdiet ac. Cras cursus nec elit et mollis.</div>
+          <div class="buy-btn">
+            <button>BUY TICKET</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="menu">
+    <div class="history">
+      <button>History</button>
+    </div>
+    <div class="logout-btn">
+      <button>Logout</button>
+    </div>
+  </div>
+  <div class="main-ctn">
+    <div class="filter-bar">
+      <div class="search-bar">
+        <input type="text" placeholder="Search your movie" class="search-input">
+
+      </div>
+      <div class="date-filter"><input type="date" class="date-input"></div>
+      <div class="time-filter"><input type="time" class="time-input"></div>
+      <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+    <div class="movie-ctn">
+      <div class="movie-card" onclick="openModal()">
+        <div class="movie-name"> LIGHT YEAR</div>
+        <div class="movie-img-overlay"></div>
+        <div class="movie-img">
+          <img
+            src="https://wallis-digital-cdn.app.vista.co/media/entity/get/FilmPosterGraphic/HO00001408?width=300&height=450&allowPlaceHolder=false">
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    function openModal() {
+      modal.style.display = "block";
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    function closeModal() {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
 </body>
 
 </html>
