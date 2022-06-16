@@ -1,5 +1,6 @@
-let BOOKING = {
-}
+let BOOKING = {}
+
+let BOOKING_ID = {}
 // Get the modal
 var modal = document.getElementById("myModal");
 
@@ -71,13 +72,16 @@ var vueinst = new Vue({
         if (this.readyState == 4 && this.status == 200) {
           var bookingList = JSON.parse(this.responseText)[0];
           BOOKING = {}
+          BOOKING_ID = {}
           for (let booking of bookingList) {
             var date = booking.date.substring(0, 10);
             if (!(date in BOOKING)) {
-              BOOKING[date] = {}
+              BOOKING[date] = {};
+              BOOKING_ID[date] = {};
             }
-            BOOKING[date][booking.startTime] = []
-            getAvailSeat(booking.booking_id, date, booking.startTime)
+            BOOKING[date][booking.startTime] = [];
+            BOOKING_ID[date][booking.startTime] = booking.booking_id;
+            getAvailSeat(booking.booking_id, date, booking.startTime);
           }
         }
       };
@@ -108,7 +112,7 @@ var vueinst = new Vue({
             modal.style.display = "none";
           }
         }
-      }, 1500)
+      }, 2000)
     },
     filterHandler: function () {
 
@@ -163,7 +167,6 @@ function updateSeat() {
   seat_sel.innerHTML = ""
   for (let seat of BOOKING[date_sel_val][time_sel_val]) {
     let seat_opt = document.createElement('option');
-    console.log(seat[0])
     seat_opt.value = seat[0];
     seat_opt.innerText = seat[1];
     seat_sel.appendChild(seat_opt)
@@ -209,7 +212,6 @@ function searchMovie() {
     if (this.readyState == 4 && this.status == 200) {
       vueinst.movies.splice(0);
       var movieList = JSON.parse(this.responseText);
-      console.log(movieList)
       for (let movie of movieList) {
         vueinst.movies.push(movie);
       }
@@ -219,4 +221,21 @@ function searchMovie() {
   xhttp.open("POST", "/filterMovie", true);
   xhttp.setRequestHeader("Content-type", "application/json");
   xhttp.send(JSON.stringify({ id: id, date: date, time: time }));
+}
+
+function buyTicket() {
+  var seat_id = document.getElementById("seat-opt").value;
+  var date = document.getElementById("date-opt").value;
+  var time = document.getElementById("time-opt").value;
+  var booking_id = BOOKING_ID[date][time];
+  var xhttp = new XMLHttpRequest();
+
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+    }
+  };
+
+  xhttp.open("POST", "/users/buyTicket", true);
+  xhttp.setRequestHeader("Content-type", "application/json");
+  xhttp.send(JSON.stringify({ booking_id: booking_id, seat_id: seat_id }));
 }
