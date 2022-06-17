@@ -51,11 +51,12 @@ CREATE TABLE Booking(
 );
 
 CREATE TABLE Ticket(
+    ticket_id INT NOT NULL AUTO_INCREMENT,
     user_id INT NOT NULL,
     booking_id INT NOT NULL,
     seat_id INT NOT NULL,
 
-    PRIMARY KEY (user_id, booking_id, seat_id),
+    PRIMARY KEY (ticket_id),
     CONSTRAINT fk_userid_to_ticketid FOREIGN KEY (user_id) REFERENCES User (user_id) ON DELETE CASCADE,
     CONSTRAINT fk_bookingid_to_ticketid FOREIGN KEY (booking_id) REFERENCES Booking (booking_id) ON DELETE CASCADE,
     CONSTRAINT fk_seatid_to_ticketid FOREIGN KEY (seat_id) REFERENCES Seat (seat_id) ON DELETE CASCADE
@@ -185,6 +186,18 @@ BEGIN
 END //
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE booking_on_2022_06_20 (
+)
+BEGIN
+    SELECT DISTINCT Movie.movie_name, Seat.seat_number FROM Booking
+    INNER JOIN Movie ON Movie.movie_id = Booking.movie_id
+    INNER JOIN Ticket ON Ticket.booking_id = Booking.booking_id
+    INNER JOIN Seat ON Seat.seat_id = Ticket.seat_id
+    WHERE date = '2022-06-20';
+END //
+DELIMITER ;
+
 /* Mock database */
 /* Create User */
 CALL sign_up('user1', 'user1@gmail.com', 'WatchMovie12@');
@@ -281,3 +294,4 @@ CALL buy_ticket(3, 14, 35);
 CALL buy_ticket(3, 2, 30);
 CALL buy_ticket(4, 2, 25);
 CALL buy_ticket(5, 2, 28);
+CALL buy_ticket(5, 1, 14);

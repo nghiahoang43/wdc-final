@@ -156,7 +156,7 @@ a {
 
 .movie-ctn {
   padding: 20px;
-  min-height: 80%;
+  min-height: 60vh;
   display: flex;
   flex-wrap: wrap;
 }
@@ -399,9 +399,10 @@ a {
 
 .ticket-ctn {
   padding: 20px;
-  min-height: 80%;
+  min-height: 60vh;
   display: flex;
   flex-wrap: wrap;
+  background: rgba(21,25,34,1);
 }
 
 .ticket-card {
@@ -463,4 +464,12 @@ td {
 
 .bigger {
   font-size: 30px;
+}
+
+.ticket-header {
+  background-color: #FFC600;
+  font-size: 40px;
+  text-align: center;
+  font-weight: bold;
+  padding: 20px;
 }

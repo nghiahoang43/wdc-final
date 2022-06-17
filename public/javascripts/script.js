@@ -247,4 +247,5 @@ function buyTicket() {
   xhttp.open("POST", "/users/buyTicket", true);
   xhttp.setRequestHeader("Content-type", "application/json");
   xhttp.send(JSON.stringify({ booking_id: booking_id, seat_id: seat_id }));
+  window.location.reload();
 }
